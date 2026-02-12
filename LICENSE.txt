@@ -1,0 +1,23 @@
+Custom Software License Agreement
+Copyright (c) 2025 Reil Padilla Design
+All Rights Reserved.
+
+This software, developed by Reil P. Padilla (“the Author”), is proprietary and is licensed, not sold. Unauthorized use, reproduction, distribution, or modification of this software or any part thereof is strictly prohibited without the express written permission of the Author.
+
+By using this software, you agree to the following terms:
+
+Ownership
+All rights, title, and interest in and to the software and its components, templates, and code remain the exclusive property of Reil Padilla Design. Any project or product created using this software or its components shall acknowledge and credit Reil P. Padilla as the original author.
+
+Usage
+This software may be used only by the individual or organization to whom it was licensed. It may not be resold, sublicensed, distributed, or reused in other commercial software, products, or projects without express written permission.
+
+No Derivative Works
+You may not alter, reverse engineer, or create derivative works based on this software or any part thereof without prior consent.
+
+Attribution
+Any public or client-facing project that incorporates or is built upon this software must include the following credit:
+“Powered by Reil Padilla Design” or as otherwise agreed in writing.
+
+No Warranty
+This software is provided “AS IS” without warranty of any kind. In no event shall the Author be held liable for any damages resulting from the use or inability to use this software.

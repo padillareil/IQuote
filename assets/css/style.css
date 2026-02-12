@@ -1,0 +1,76 @@
+.main-header {
+  z-index: 0;
+  position: relative;
+}
+
+/* Sidebar styling */
+.main-sidebar {
+  width: 250px;
+  background-color: #C0C0C0;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+
+/* Navigation link style */
+.main-sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Active link appearance */
+.main-sidebar .nav-link.active,
+.main-sidebar .nav-link:hover {
+  background-color: #C0C0C0;
+  color: #ffffff;
+}
+
+/* Icons */
+.main-sidebar .nav-icon {
+  font-size: 18px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Paragraph inside nav links */
+.main-sidebar .nav-link p {
+  margin: 0;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Sidebar logo image */
+.main-sidebar img {
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+
+/* Make sidebar overlap header */
+.main-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  z-index: 1045;
+  background-color: #36454F;
+  overflow-y: auto;
+}
+
+/* Push main content if needed (optional) */
+body {
+  padding-left: 250px; /* Only if you want content shifted */
+}
+
+/* Header remains below the sidebar (optional tweak) */
+header {
+  z-index: 1030; /* Lower than sidebar */
+  position: relative;
+}
