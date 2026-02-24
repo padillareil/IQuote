@@ -1,33 +1,78 @@
 <?php
-  require_once "../../../../config/local_db.php";
+require_once "../../../../config/local_db.php";
+$Branch = $_POST['Branch'] ?? '';
 
-  $Branch     = $_POST['Branch'];
+if (empty($Branch)) {
+    echo json_encode([
+        "isSuccess" => "Failed",
+        "Data"      => "Invalid branch parameter."
+    ]);
+    exit;
+}
 
-  $response    = array();
+function reil_decrypt(?string $encryptedData): string
+{
+    if (!$encryptedData) return '';
+
+    $key  = hash('sha256', 'Greek2001', true);
+    $data = base64_decode($encryptedData);
+
+    if ($data === false || strlen($data) < 17) return '';
+
+    $iv     = substr($data, 0, 16);
+    $cipher = substr($data, 16);
+
+    $plain = openssl_decrypt(
+        $cipher,
+        'AES-256-CBC',
+        $key,
+        OPENSSL_RAW_DATA,
+        $iv
+    );
+
+    return $plain === false ? '' : $plain;
+}
+
+$response = [];
 
 try {
-  $conn->beginTransaction();
 
-    $fetch_branchbank = $conn->prepare("
-      EXEC GET_PERSONALBANKACCOUNT @mBranch_ = ?
+    $conn->beginTransaction();
+
+    $stmt = $conn->prepare("
+        EXEC GET_PERSONALBANKACCOUNT @mBranch_ = ?
     ");
-    $fetch_branchbank->execute([ $Branch ]);
-    $get_branchbank = $fetch_branchbank->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute([$Branch]);
 
-  $conn->commit();
+    $get_branchbank = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($get_branchbank as &$row) {
+        if (!empty($row['AccountName'])) {
+            $row['AccountName'] = reil_decrypt($row['AccountName']);
+        }
 
-  $response = array(
-    "isSuccess" => 'success',
-    "Data" => $get_branchbank
-  );
-  echo json_encode($response);
+        if (!empty($row['AccountNumber'])) {
+            $row['AccountNumber'] = reil_decrypt($row['AccountNumber']);
+        }
+    }
 
-}catch (PDOException $e){
-  $conn->rollback();
-  $response = array(
-    "isSuccess" => 'Failed',
-    "Data" => "<b>Error. Please Contact System Developer. <br/></b>".$e->getMessage()
-  );
-  echo json_encode($response);
+    $conn->commit();
+
+    $response = [
+        "isSuccess" => "success",
+        "Data"      => $get_branchbank
+    ];
+
+} catch (PDOException $e) {
+
+    if ($conn->inTransaction()) {
+        $conn->rollback();
+    }
+
+    $response = [
+        "isSuccess" => "Failed",
+        "Data"      => "<b>Error. Please Contact System Developer.<br/></b>" . $e->getMessage()
+    ];
 }
+
+echo json_encode($response);
 ?>
