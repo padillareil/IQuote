@@ -77,8 +77,10 @@ $("#frm-login").on("submit", function (event) {
       }
 
     } else {
-      console.log("Login failed:", response.Message);
-      console.log("Invalid username or password.");
+       console.log("Login failed:", response.Message);
+      $("#user-username").addClass("input-error");
+      $("#user-password").addClass("input-error");
+      $("#login-error").removeClass("d-none");
     }
   });
 });

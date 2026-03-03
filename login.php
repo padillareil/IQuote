@@ -29,14 +29,16 @@
 	        <small>Version 2.0</small>
 	      </div>
 	      <div class="form-floating mb-3">
-	        <input type="text" name="user-username" id="user-username" 
-	               class="form-control rounded-0" placeholder="Username" required autocomplete="off">
-	        <label for="user-username">Username</label>
+	          <input type="text" name="user-username" id="user-username" class="form-control rounded-0" placeholder="Username" required autocomplete="off">
+	          <label for="user-username">Username</label>
 	      </div>
+
 	      <div class="form-floating mb-2">
-	        <input type="password" name="user-password" id="user-password" 
-	               class="form-control rounded-0" placeholder="Password" required autocomplete="off">
-	        <label for="user-password">Password</label>
+	          <input type="password" name="user-password" id="user-password" class="form-control rounded-0" placeholder="Password" required autocomplete="off">
+	          <label for="user-password">Password</label>
+	      </div>
+	      <div id="login-error" class="text-danger small mt-2 d-none">
+	          Invalid username or password.
 	      </div>
 	      <div class="form-check d-flex justify-content-end mb-3">
 	        <input class="form-check-input" type="checkbox" id="toggle-show-password" onclick="togglePassword()">
@@ -92,6 +94,11 @@
 	function contactSoftDev() {
 		$("#mdl-forgot-password").modal("show")
 	}
+	/*Remove invalid danger upon on type*/
+	$("#user-username, #user-password").on("input", function () {
+	    $(this).removeClass("input-error");
+	    $("#login-error").addClass("d-none");
+	});
 </script>
 
 <!-- Modal Forgot Password -->
@@ -105,3 +112,11 @@
   </div>
 </div>
 
+
+
+<style>
+.input-error {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+}
+</style>
