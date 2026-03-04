@@ -29,13 +29,12 @@
             <input type="text" id="number-cancelled" name="number-cancelled" class="form-control" placeholder="Cancelled" readonly>
             <label for="number-cancelled">Cancelled</label>
           </div>
-
         </div>
       </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-outline-danger"  onclick="commitRemove()">Remove</button>
-        <button type="button" class="btn btn-outline-secondary"  onclick="commitEnable()">Enable</button>
-        <button type="button" class="btn btn-outline-danger"   onclick="disableuser()">Disable</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" onclick="mdlRemove()">Remove</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="mdlenable()">Enable</button>
+        <button type="button" class="btn btn-outline-danger"  onclick="mdlDisable()">Disable</button>
       </div>
     </div>
   </div>
@@ -56,10 +55,12 @@
           <input type="hidden" id="staff-branch">
           <div class="form-floating mb-2" id="select-branchassignment">
             <select class="form-select" id="branch-assignment" name="branch-assignment">
+              <option selected disabled></option>
+              <option value="Branch">Branch</option>
             </select>
             <label for="branch-assignment">Branch Assignment</label>
           </div>
-          <input type="hidden" name="branch-code" id="branch-code">
+          <input type="text" name="branch-code" id="branch-code">
           <div class="form-floating mb-2">
             <input type="text" id="staff-fullname" name="staff-fullname" class="form-control" placeholder="Fullname">
             <label for="staff-fullname">Fullname</label>
@@ -67,14 +68,6 @@
           <div class="form-floating mb-2">
             <input type="text" id="staff-position" name="staff-position" class="form-control" placeholder="Position">
             <label for="staff-position">Position</label>
-          </div>
-          <div class="form-floating mb-2">
-            <input type="email" id="staff-personalemail" name="staff-personalemail" class="form-control" placeholder="Email"  autocomplete="off">
-            <label for="staff-personalemail">Email</label>
-          </div>
-          <div class="form-floating mb-2">
-            <input type="text" id="staff-contactnumber" name="staff-contactnumber" class="form-control" placeholder="Contact Number" maxlength="11" autocomplete="off">
-            <label for="staff-contactnumber">Contact number</label>
           </div>
           <div class="form-floating mb-2">
             <input type="text" id="staff-username" name="staff-username" class="form-control" placeholder="Username">
@@ -107,69 +100,76 @@
       const checkbox = document.getElementById('staff-showpass');
       passwordField.type = checkbox.checked ? 'text' : 'password';
   }
-
-  $(document).ready(function () {
-      function generateHOCredentials() {
-          let fullname   = $("#staff-fullname").val().trim();
-          let branchCode = $("#branch-code").val();
-
-          if (fullname !== "") {
-              let processedName = fullname.toUpperCase().replace(/\s+/g, "");
-              $("#staff-username").val(branchCode + "-" + processedName);
-              $("#staff-password").val(processedName);
-          } else {
-              $("#staff-username").val("");
-              $("#staff-password").val("");
-          }
-      }
-
-      $("#staff-fullname").on("input", generateHOCredentials);
-      $("#branch-code").on("input", generateHOCredentials);
-
-  });
-
-
-  $(document).ready(function(){
-      const $input = $("#staff-contactnumber");
-
-      // Auto insert 09 when focused
-      $input.on("focus", function(){
-          if ($(this).val() === "") {
-              $(this).val("09");
-          }
-      });
-
-      // Prevent deleting the first two characters (09)
-      $input.on("keydown", function(e){
-          if ($(this)[0].selectionStart <= 2 &&
-              (e.key === "Backspace" || e.key === "Delete")) {
-              e.preventDefault();
-          }
-      });
-
-      // Allow numbers only and enforce rules
-      $input.on("input", function(){
-          let value = $(this).val();
-
-          // Remove non-numeric characters
-          value = value.replace(/\D/g, "");
-
-          // Ensure it starts with 09
-          if (!value.startsWith("09")) {
-              value = "09";
-          }
-
-          // Limit to 11 digits
-          if (value.length > 11) {
-              value = value.substring(0, 11);
-          }
-
-          $(this).val(value);
-      });
-
-  });
-
 </script>
+
+<!-- Modal enable user propmt -->
+<div class="modal fade" id="mdl-access-user" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center">
+          <p class="text-muted">Do you want to enable this user?</p>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" onclick="commitEnable()">Yes</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal remove user propmt -->
+<div class="modal fade" id="mdl-remove-user" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center">
+          <p class="text-muted">Do you want to remove this user?</p>
+        </div>
+        <div class="mt-2 form-floating">
+          <select class="form-select" id="remove-reason" name="remove-reason">
+            <option selected disabled>Select Reason</option>
+            <option value="Resigned">Resigned</option>
+            <option value="Terminated">Terminated</option>
+            <option value="Transferred">Transferred</option>
+            <option value="Retired">Retired</option>
+          </select>
+          <label for="remove-reason">Reason</label>
+        </div>
+        <small class="text-muted">Please state your reason (remove).</small>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" onclick="commitRemove()">Yes</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal disable user propmt -->
+<div class="modal fade" id="mdl-disable-user" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center">
+          <p class="text-muted">Do you want to disable this user?</p>
+        </div>
+        <div class="mt-2 form-floating">
+          <textarea class="form-control" id="disable-reason" name="disable-reason" maxlength="50" placeholder="Reason" style="height: 20vh;"></textarea>
+          <label for="disable-reason">Reason</label>
+        </div>
+        <small class="text-muted">Please state your reason (disabled).</small>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" onclick="commitDisable()">Yes</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal remove Propmpt -->
 <div class="modal fade" id="mdl-remove" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">

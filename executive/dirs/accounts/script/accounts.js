@@ -56,6 +56,8 @@ function createStaff() {
     var Password    = $("#staff-password").val();
     var Branchcode  = $("#branch-code").val();
     var Branch      = $("#branch-assignment").val();
+    var Contact     = $("#staff-contactnumber").val();
+    var Email       = $("#staff-personalemail").val();
 
     // Submit via AJAX
     $.post("dirs/accounts/actions/save_staff.php", {
@@ -65,6 +67,8 @@ function createStaff() {
         Password: Password,
         Branchcode: Branchcode,
         Branch: Branch,
+        Contact : Contact,
+        Email: Email,
     }, function (data) {
         if ($.trim(data) === "OK") {
        /*     console.log("Staff account created successfully.");*/

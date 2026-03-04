@@ -1,36 +1,4 @@
 <input type="hidden" id="qnumber-print"><!-- Contains the Quotation number -->
-
-<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-  <div class="mb-2">
-<!--     <h4 class="text-muted mb-0">Quotations</h4>
- -->    <!-- <small class="text-muted">Showing your all quotations prepared by you and your team.</small> -->
-  </div>
-  <div class="col-md-3 text-md-end text-start">
-    <!-- Verify Button -->
-    <button class="btn btn-outline-secondary" type="button" title="Verify Quotation Reference No." onclick="loadmdlVerify()">
-      <i class="bi bi-file-text"></i> Verify Ref. No.
-    </button>
-    <!-- Filter Dropdown -->
-    <!-- <div class="dropdown d-inline-block">
-      <button 
-        class="btn btn-light dropdown-toggle" 
-        type="button" 
-        id="filterDropdown" 
-        data-bs-toggle="dropdown" 
-        aria-expanded="false">
-        <i class="bi bi-funnel me-1"></i> Filter
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
-        <li onclick="loadHome()"><a class="dropdown-item" href="#">All</a></li>
-        <li onclick="mdlFilterBranches()"><a class="dropdown-item" href="#">Branch</a></li>
-        <li onclick="mdlDateRange()"><a class="dropdown-item" href="#">Date</a></li>
-      </ul>
-    </div> -->
-  </div>
-
-
-</div>
-<hr>
 <div class="mt-1 mb-1">
   <input type="search" name="search-quotation" id="search-quotation" class="form-control form-control-lg" placeholder="Search">
 </div>
@@ -76,10 +44,6 @@
 
 </div>
 
-
-
-
-
 <script>
   $(document).ready(function() {
     loadQuotations();
@@ -92,50 +56,49 @@
       });
   });
 
-  /*Function format number with comma*/
-  function formatwithComma(value) {
-      if (value === null || value === undefined || value === '') return '0';
-      return Number(value).toLocaleString('en-US');
-  }
-
-  /*Function format date */
-  function formatDateSetup(dateStr) {
-      if (!dateStr) return '';
-      const parts = dateStr.split('-'); 
-      const year  = parts[0];
-      const day   = parts[1].padStart(2, '0');
-      const month = parts[2].padStart(2, '0');
-      return `${month}/${day}/${year}`;
-  }
-
-  /*Function convert datetime into correct format*/
-function convertDate(dateStr) {
-    if (!dateStr || typeof dateStr !== 'string') return '';
-    dateStr = dateStr.trim();
-    let day, month, year;
-    if (dateStr.includes('/')) {
-        const parts = dateStr.split('/');
-        if (parts.length !== 3) return '';
-        [day, month, year] = parts;
+    /*Function format number with comma*/
+    function formatwithComma(value) {
+        if (value === null || value === undefined || value === '') return '0';
+        return Number(value).toLocaleString('en-US');
     }
-    else if (dateStr.includes('-')) {
-        const parts = dateStr.split(' ')[0].split('-');
-        if (parts.length !== 3) return '';
-        year = parts[0];
-        month = parts[1];
-        day = parts[2];
-    } else {
-        return '';
+
+    /*Function format date */
+    function formatDateSetup(dateStr) {
+        if (!dateStr) return '';
+        const parts = dateStr.split('-'); 
+        const year  = parts[0];
+        const day   = parts[1].padStart(2, '0');
+        const month = parts[2].padStart(2, '0');
+        return `${month}/${day}/${year}`;
     }
-    return `${month.padStart(2, '0')}/${day.padStart(2, '0')}/${year}`;
-}
+
+    /*Function convert datetime into correct format*/
+  function convertDate(dateStr) {
+      if (!dateStr || typeof dateStr !== 'string') return '';
+      dateStr = dateStr.trim();
+      let day, month, year;
+      if (dateStr.includes('/')) {
+          const parts = dateStr.split('/');
+          if (parts.length !== 3) return '';
+          [day, month, year] = parts;
+      }
+      else if (dateStr.includes('-')) {
+          const parts = dateStr.split(' ')[0].split('-');
+          if (parts.length !== 3) return '';
+          year = parts[0];
+          month = parts[1];
+          day = parts[2];
+      } else {
+          return '';
+      }
+      return `${month.padStart(2, '0')}/${day.padStart(2, '0')}/${year}`;
+  }
 
 
 /*Function fetch data using pagination*/
   var currentPage = 1;
   var pageSize = 100; 
   var isLoading = false;
-  var Bcode = $("#bcode-paramter").val();
   $("#btn-preview").prop("disabled", true);
   function loadQuotations(page = 1) {
       if (isLoading) return;
@@ -143,8 +106,7 @@ function convertDate(dateStr) {
       $("#page-loader").show();
       $.post("dirs/quotations/actions/get_quotation.php", {
           CurrentPage: page,
-          PageSize: pageSize,
-          Bcode: Bcode
+          PageSize: pageSize
       }, function(data) {
           let response = JSON.parse(data);
           if ($.trim(response.isSuccess) === "success") {
@@ -216,6 +178,9 @@ function convertDate(dateStr) {
                                   ${formatwithComma(item.GTOTAL)}
                               </small>
                           </div>
+                          <small class="text-muted d-block">${item.Day || ""}</small>
+                          <small class="text-muted d-block">${item.Date || ""}</small>
+                          <small class="text-muted d-block">${item.Time || ""}</small>
                           <small class="text-primary fw-bold d-block">${item.Interval || ""}</small>
                           
                       </div>
@@ -230,9 +195,9 @@ function convertDate(dateStr) {
                       >
                           <i class="bi bi-chat-left-text"></i> View Details
                       </button>
-                      <button class="btn btn-sm btn-outline-secondary" onclick="loadOpenQuotation('${item.QNumber}')"><i class="bi bi-arrow-up-right-square"></i> Open</button>
-                  </div>
+                      <button class="btn btn-sm btn-outline-secondary " onclick="loadOpenQuotation('${item.QNumber}')">Open</button>
 
+                  </div>
               </a>
           `);
       });
@@ -265,16 +230,13 @@ function convertDate(dateStr) {
   });
 
 
-  
-  /*function formatNumberUSFixed(value, decimals = 2) {
-      if (value === null || value === undefined || value === '') return '0.00';
-      return Number(value).toLocaleString('en-US', {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
+/*
+  function loadOpenQuotation(QNUMBER) {
+      $.post("dirs/editquotation/editquotation.php", { QNUMBER: QNUMBER }, function (data) {
+          $("#load_quotations").html(data);
+          loadProposedQuotation(QNUMBER);
       });
-  }
-*/
-
+  }*/
   function loadOpenQuotation(QNumber) {
       $.post("dirs/quotations/actions/get_editquotations.php", {
           QNumber: QNumber
@@ -413,8 +375,8 @@ function convertDate(dateStr) {
                               </div>
                               <div class="col-md-6 mb-2">
                                   <div class="form-floating mb-2">
-                                      <input type="text" name="edit-manualdiscount[]" class="form-control border border-warning edit-manualdiscount" value="${formatwithComma(item.ManualDiscount)}">
-                                      <label>Discounted Amount</label>
+                                      <input type="text" name="edit-manualdiscount[]" class="form-control bg-white edit-manualdiscount" readonly value="${formatwithComma(item.ManualDiscount)}">
+                                      <label>Discount Amount</label>
                                   </div>
                               </div>
 
@@ -424,13 +386,13 @@ function convertDate(dateStr) {
 
 
 
-                              <div class="justify-content-end d-flex">
-                                  <button class="btn btn-outline-secondary me-2" type="button" onclick="reapplyManualDiscount(this)">Apply Discounted Amount</button>
-                              </div>
                           </div>
                       `;
                       $("#item-orders").append(orderHtml);
                   });
+                              // <div class="justify-content-end d-flex">
+                              //     <button class="btn btn-outline-secondary me-2" type="button" onclick="reapplyManualDiscount(this)">Apply Manual Discount</button>
+                              // </div>
 
                      // TERMS & CONDITIONS
                   $("#termscondition-container").empty();
@@ -440,7 +402,7 @@ function convertDate(dateStr) {
                               <div class="col-md-12 mb-2 termscondition">
                                   <div class="input-group">
                                       <textarea
-                                          class="form-control border border-warning edit-termscondition"
+                                          class="form-control bg-white edit-termscondition" readonly
                                           name="edit-termscondition"
                                           style="height: 10vh;"
                                       >${term.TermsCondition}</textarea>
@@ -467,7 +429,7 @@ function convertDate(dateStr) {
                               <div class="col-md-12 mb-2 warranty">
                                   <div class="input-group">
                                       <textarea
-                                          class="form-control border border-warning edit-warranty"
+                                          class="form-control bg-white edit-warranty" readonly
                                           name="edit-warranty"
                                           style="height: 10vh;"
                                       >${warranty.Warranty}</textarea>
@@ -496,6 +458,8 @@ function convertDate(dateStr) {
           }
       });
   }
+
+
 
   /*Function to verify quotation*/
        function verifyLoadNumber() {
@@ -639,7 +603,7 @@ function convertDate(dateStr) {
                                    <div class="col-md-6 mb-2">
                                        <div class="form-floating mb-2">
                                            <input type="text" name="edit-manualdiscount[]" class="form-control border border-warning edit-manualdiscount" value="${formatwithComma(item.ManualDiscount)}">
-                                           <label>Discounted Amount</label>
+                                           <label>Manual Discount</label>
                                        </div>
                                    </div>
 
@@ -650,7 +614,7 @@ function convertDate(dateStr) {
 
 
                                    <div class="justify-content-end d-flex">
-                                       <button class="btn btn-outline-secondary me-2" type="button" onclick="reapplyManualDiscount(this)">Apply Discounted Amount</button>
+                                       <button class="btn btn-outline-secondary me-2" type="button" onclick="reapplyManualDiscount(this)">Apply Manual Discount</button>
                                    </div>
                                </div>
                            `;
@@ -715,8 +679,7 @@ function convertDate(dateStr) {
                    alert($.trim(response.Data));
                }
            });
-       }   
-
+       }
 
 
   /*Function display next page*/
@@ -731,12 +694,8 @@ function convertDate(dateStr) {
 
 
 
-
- // =========================
- // Manual Discount Input Formatter
- // =========================
+/*Input Manual Discount Format with comma and only number allowed*/
  $(document).ready(function () {
-     // Format manual discount input with commas
      $(document).on("input", ".edit-manualdiscount", function () {
          let val = $(this).val();
          val = val.replace(/\D/g, "");
@@ -747,242 +706,26 @@ function convertDate(dateStr) {
              $(this).val(val);
          }
      });
-
-     // Recalculate totals when quantity, price, discount, or delivery changes
-     $(document).on("input", ".edit-quantity, .edit-sellingprice, .edit-discountperunit, .edit-manualdiscount, #edit-deliverycharge", function () {
-         let val = $(this).val().replace(/[^0-9]/g, "");
-         $(this).val(val ? Number(val).toLocaleString() : "");
-
-         let $row = $(this).closest(".edit-item-order");
-         if ($row.length) editcalculateGrossTotal($row);
-         editcalculateGrandTotal();
-     });
  });
-
- // =========================
- // Calculation Functions
- // =========================
- function editcalculateGrossTotal($row) {
-     let sPrice = parseFloat($row.find(".edit-sellingprice").val().replace(/,/g, "")) || 0;
-     let qty = parseFloat($row.find(".edit-quantity").val().replace(/,/g, "")) || 0;
-     let discount = parseFloat($row.find(".edit-discountperunit").val().replace(/,/g, "")) || 0;
-
-     let gross = sPrice * qty;
-     if (discount > 0) gross -= discount * qty;
-
-     $row.find(".edit-grosstotal").val(gross > 0 ? gross.toLocaleString(undefined, { minimumFractionDigits: 2 }) : "");
- }
-
- function editcalculateGrandTotal() {
-     let grand = 0;
-     $(".edit-item-order").each(function () {
-         let rowGross = parseFloat($(this).find(".edit-grosstotal").val().replace(/,/g, "")) || 0;
-         grand += rowGross;
-     });
-
-     let delivery = parseFloat($("#edit-deliverycharge").val()?.replace(/,/g, "")) || 0;
-     grand += delivery;
-
-     $("#edit-grandtotal").val(
-         grand > 0 ? grand.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ""
-     );
- }
-
-/*Orignal Functions just restore this if OPCIS is repaired*/
- // =========================
- // Apply Manual Discount
- // =========================
- // function reapplyManualDiscount(btn) {
- //     let $row = $(btn).closest(".edit-item-order");
-
- //     let manualDiscount = parseFloat($row.find(".edit-manualdiscount").val().replace(/,/g, "")) || 0;
- //     let grossTotal     = parseFloat($row.find(".edit-grosstotal").val().replace(/,/g, "")) || 0;
- //     let priceLimitSum  = parseFloat($row.find(".pricelimit-sum").val().replace(/,/g, "")) || 0;
-
- //     // Check against floor (price limit)
- //     if (manualDiscount < priceLimitSum) {
- //         Swal.fire({
- //             icon: "error",
- //             title: "Invalid Discount",
- //             text: "The Discounted Amount is below your authorized limit."
- //         }).then(() => {
- //             editresetDiscount($row);
- //         });
- //         return;
- //     }
-
- //     // Check against gross total
- //     if (manualDiscount > grossTotal) {
- //         Swal.fire({
- //             icon: "error",
- //             title: "Invalid Discount",
- //             text: "The Discounted Amount exceeds the gross total."
- //         }).then(() => {
- //             editresetDiscount($row);
- //         });
- //         return;
- //     }
-
- //     // Update values
- //     let quantity = parseFloat($row.find(".edit-quantity").val().replace(/,/g, "")) || 0;
- //     let srp = parseFloat($row.find(".edit-sellingprice").val().replace(/,/g, "")) || 0;
-
- //     let discountPerUnit = (srp * quantity - manualDiscount) / quantity;
- //     let discountedAmountPerUnit = srp - discountPerUnit;
-
- //     $row.find(".edit-discountperunit").val(discountPerUnit.toFixed(2));
- //     $row.find(".edit-discountedamountperunit").val(discountedAmountPerUnit.toFixed(2));
- //     $row.find(".edit-grosstotal").val(manualDiscount.toFixed(2));
-
- //     editcalculateGrandTotal();
- // }
-
-
- // // =========================
- // // Reset Helper (uses original values)
- // // =========================
- // function editresetDiscount($row) {
- //     // Get original values from hidden fields
- //     let originalTotal = parseFloat($row.find(".original-totalamount").val().replace(/,/g, "")) || 0;
- //     let originalDiscount = parseFloat($row.find(".original-discount").val().replace(/,/g, "")) || 0;
- //     let originalDiscounted = parseFloat($row.find(".original-discountedamount").val().replace(/,/g, "")) || 0;
-
- //     // Reset fields back to original values
- //     $row.find(".edit-manualdiscount").val("");
- //     $row.find(".edit-discountperunit").val(originalDiscount.toLocaleString(undefined, { minimumFractionDigits: 2 }));
- //     $row.find(".edit-discountedamountperunit").val(originalDiscounted.toLocaleString(undefined, { minimumFractionDigits: 2 }));
- //     $row.find(".edit-grosstotal").val(originalTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }));
-
- //     editcalculateGrandTotal();
- // }
- /*Orignal Functions just restore this if OPCIS is repaired*/
-
-
-
-
-
- /*****************TEMPORARILY FUNCTIONS FOR OVERIRIDING THE DISCOUTING*********************************************/
-
-/*Function to apply manual Discounting*/
- function reapplyManualDiscount(btn) {
-     let $row = $(btn).closest(".edit-item-order");
-
-     let manualDiscount = parseFloat($row.find(".edit-manualdiscount").val().replace(/,/g, "")) || 0;
-     let grossTotal     = parseFloat($row.find(".edit-grosstotal").val().replace(/,/g, "")) || 0;
-     let priceLimitSum  = parseFloat($row.find(".pricelimit-sum").val().replace(/,/g, "")) || 0;
-     if (manualDiscount < priceLimitSum || manualDiscount > grossTotal) {
-         Swal.fire({
-             icon: "warning",
-             title: "Confirm Discount",
-             text: manualDiscount < priceLimitSum
-                 ? "The Discounted Amount is below your authorized limit. Do you want to proceed?"
-                 : "The Discounted Amount exceeds the gross total. Do you want to proceed?",
-             showCancelButton: true,
-             confirmButtonText: "Proceed",
-             cancelButtonText: "No",
-             focusConfirm: true
-         }).then((result) => {
-             if (result.isConfirmed) {
-                 applyEditedDiscount($row, manualDiscount);
-             } else {
-                 editRestoreOriginalValues($row);
-             }
-         });
-
-         return; 
-     }
-     applyEditedDiscount($row, manualDiscount);
- }
-
- /*Function helper for restoring to the original*/
-   function editRestoreOriginalValues($row) {
-       let originalTotal      = parseFloat($row.find(".original-totalamount").val().replace(/,/g, "")) || 0;
-       let originalDiscount   = parseFloat($row.find(".original-discount").val().replace(/,/g, "")) || 0;
-       let originalDiscounted = parseFloat($row.find(".original-discountedamount").val().replace(/,/g, "")) || 0;
-       $row.find(".edit-manualdiscount").val("");
-       $row.find(".edit-discountperunit").val(
-           originalDiscount > 0 ? originalDiscount.toFixed(2) : ""
-       );
-       $row.find(".edit-discountedamountperunit").val(
-           originalDiscounted > 0 ? originalDiscounted.toFixed(2) : ""
-       );
-       $row.find(".edit-grosstotal").val(
-           originalTotal > 0 ? originalTotal.toFixed(2) : ""
-       );
-       editcalculateGrandTotal();
-   }
-
-
-
-   /*Function for helper for proceed button*/
-   function applyEditedDiscount($row, manualDiscount) {
-       let quantity = parseFloat($row.find(".edit-quantity").val().replace(/,/g, "")) || 0;
-       let srp      = parseFloat($row.find(".edit-sellingprice").val().replace(/,/g, "")) || 0;
-
-       let discountPerUnit = (srp * quantity - manualDiscount) / quantity;
-       let discountedAmountPerUnit = srp - discountPerUnit;
-
-       $row.find(".edit-discountperunit").val(discountPerUnit.toFixed(2));
-       $row.find(".edit-discountedamountperunit").val(discountedAmountPerUnit.toFixed(2));
-       $row.find(".edit-grosstotal").val(manualDiscount.toFixed(2));
-
-       editcalculateGrandTotal();
-   }
-
- /*****************TEMPORARILY FUNCTIONS FOR OVERIRIDING THE DISCOUTING*********************************************/
-
-
 
 
  /*Function to show quotation number for printing preference*/
- function loadPrint(QNumber){
-    $("#mdl-printing-preference").modal('show');
-     $.post("dirs/quotations/actions/get_quotenumber.php",{
-         QNUMBER : QNumber
-     },function(data){
-         response = JSON.parse(data);
-         if(jQuery.trim(response.isSuccess) == "success"){
-             $("#qnumber-print").val(response.Data.QNumber);
-         }else{
-             alert(jQuery.trim(response.Data));
-         }
-     });
- }
+  function loadPrint(QNumber){
+     $("#mdl-printing-preference").modal('show');
+      $.post("dirs/quotations/actions/get_quotenumber.php",{
+          QNUMBER : QNumber
+      },function(data){
+          response = JSON.parse(data);
+          if(jQuery.trim(response.isSuccess) == "success"){
+              $("#qnumber-print").val(response.Data.QNumber);
+          }else{
+              alert(jQuery.trim(response.Data));
+          }
+      });
+  }
 
-
-/*Function for single pager pdf*/
- function pdfSinglePage(){
-    var QNumber = $("#qnumber-print").val();
-     $.post("dirs/quotations/actions/get_refnumber.php", {
-         QNumber : QNumber
-     }, function(data){
-         let response = JSON.parse(data);
-         if($.trim(response.isSuccess) === "success"){
-             if (response.Data.QStatus === 'APPROVED') {
-                 
-                 // Create hidden form to send QNumber via POST
-                 let form = document.createElement("form");
-                 form.method = "POST";
-                 form.action = "../pdf/coporate business executive format_1/iQuote.php";
-                 form.target = "_blank"; // open in new tab
-                 let input = document.createElement("input");
-                 input.type = "hidden";
-                 input.name = "QNumber";
-                 input.value = response.Data.QNumber;
-                 form.appendChild(input);
-                 
-                 document.body.appendChild(form);
-                 form.submit();
-                 document.body.removeChild(form);
-             } 
-         } else {
-             alert($.trim(response.Data));
-         }
-     });
- }
-
- /*Function for multiple pager pdf*/
-  function pdfMultiplePage(){
+ /*Function for single pager pdf*/
+  function pdfSinglePage(){
      var QNumber = $("#qnumber-print").val();
       $.post("dirs/quotations/actions/get_refnumber.php", {
           QNumber : QNumber
@@ -994,7 +737,7 @@ function convertDate(dateStr) {
                   // Create hidden form to send QNumber via POST
                   let form = document.createElement("form");
                   form.method = "POST";
-                  form.action = "../pdf/coporate business executive format_2/iQuote.php";
+                  form.action = "../pdf/coporate business executive format_1/iQuote.php";
                   form.target = "_blank"; // open in new tab
                   let input = document.createElement("input");
                   input.type = "hidden";
@@ -1011,5 +754,37 @@ function convertDate(dateStr) {
           }
       });
   }
+
+  /*Function for multiple pager pdf*/
+   function pdfMultiplePage(){
+      var QNumber = $("#qnumber-print").val();
+       $.post("dirs/quotations/actions/get_refnumber.php", {
+           QNumber : QNumber
+       }, function(data){
+           let response = JSON.parse(data);
+           if($.trim(response.isSuccess) === "success"){
+               if (response.Data.QStatus === 'APPROVED') {
+                   
+                   // Create hidden form to send QNumber via POST
+                   let form = document.createElement("form");
+                   form.method = "POST";
+                   form.action = "../pdf/coporate business executive format_2/iQuote.php";
+                   form.target = "_blank"; // open in new tab
+                   let input = document.createElement("input");
+                   input.type = "hidden";
+                   input.name = "QNumber";
+                   input.value = response.Data.QNumber;
+                   form.appendChild(input);
+                   
+                   document.body.appendChild(form);
+                   form.submit();
+                   document.body.removeChild(form);
+               } 
+           } else {
+               alert($.trim(response.Data));
+           }
+       });
+   }
+ 
 </script>
 

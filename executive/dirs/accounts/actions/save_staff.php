@@ -9,6 +9,8 @@ $Username       = $_POST['Username'];
 $Password       = $_POST['Password']; 
 $Branchcode     = $_POST['Branchcode'];
 $Branch         = $_POST['Branch'];
+$Contact        = $_POST['Contact']?? '';
+$Email          = $_POST['Email']?? '';
 $Role           = 'HBU';
 $AccountStatus  = 'ENABLE';
 $AccountType    = 'Head Office Branch';
@@ -36,32 +38,6 @@ try {
 
 
     $conn->beginTransaction();
-
-    // // Check duplicate
-    // $check_duplicate = $conn->prepare("
-    //     SELECT COUNT(*)
-    //     FROM usr 
-    //     WHERE Name = ? AND Branch = ? AND Username = ? AND Role = ?
-    // ");
-    // $check_duplicate->execute([$Fullname, $Branch, $Username, $Role]);
-    // if ($check_duplicate->fetchColumn() > 0) {
-    //     $conn->rollBack();
-    //     exit("This Account Already Exists.");
-    // }
-
-    // /*Check and find user in the branch to prevent duplicate*/
-    // $check_branch = $conn->prepare("
-    //     SELECT COUNT(*)
-    //     FROM usr 
-    //     WHERE Branch = ? AND Createdby = ?
-    // ");
-    // $check_branch->execute([$Branch, $Admin]);
-
-    // if ($check_branch->fetchColumn() > 0) {
-    //     $conn->rollBack();
-    //     exit("This Account Already assigned in this branch.");
-    // }
-
 
     // Check duplicate
     $check_duplicate = $conn->prepare("
@@ -103,8 +79,8 @@ try {
     // Insert user (make sure usr table has both Position and UPosition columns!)
     $ins_user = $conn->prepare("
         INSERT INTO usr 
-        (Name, Position, UPosition, Username, Password, Branch, Bcode, Role, AccountType, Landline, Mobile, Createdby, Corporation, Address, Region, AccountStatus, IDMAccess)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (Name, Position, UPosition, Username, Password, Branch, Bcode, Role, AccountType, Landline, Mobile, Createdby, Corporation, Address, Region, AccountStatus, IDMAccess, Email)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $ins_user->execute([
         $Fullname, 
@@ -117,13 +93,14 @@ try {
         $Role, 
         $AccountType,
         $Landline,
-        $Mobile,
+        $Contact,
         $Admin,
         $Corpcode,
         $Address,
         $Area,
         $AccountStatus,
-        $IDMAccess 
+        $IDMAccess,
+        $Email
     ]);
 
 

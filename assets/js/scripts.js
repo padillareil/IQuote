@@ -65,7 +65,7 @@ $("#frm-login").on("submit", function (event) {
       } else if (role === "BOSS") {
         window.location.assign("management/index.php");
       } else if (role === "HBU") {
-        window.location.assign("client/index.php");
+        window.location.assign("iapcorpobusinessexecutive/index.php");
       } else if (role === "Audit") {
         window.location.assign("audit/index.php");
       } else if (role === "Coordinator") {
