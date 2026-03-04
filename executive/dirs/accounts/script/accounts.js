@@ -302,3 +302,20 @@ function loadBranchdode(){
         }
     });
 }
+
+/*Function show user account Contacts and Email*/
+function loaduserContact(){
+    var Username = $("#user-username").val();
+    $.post("dirs/accounts/actions/get_contact.php",{
+        Username : Username
+    },function(data){
+        response = JSON.parse(data);
+        if(jQuery.trim(response.isSuccess) == "success"){
+            $("#account-mobile").val(response.Data.Mobile);
+            $("#account-email").val(response.Data.Email);
+        }else{
+            alert(jQuery.trim(response.Data));
+        }
+    });
+}
+

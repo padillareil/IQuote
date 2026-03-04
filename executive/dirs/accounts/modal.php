@@ -33,9 +33,10 @@
         </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-outline-danger"  onclick="commitRemove()">Remove</button>
-        <button type="button" class="btn btn-outline-secondary"  onclick="commitEnable()">Enable</button>
-        <button type="button" class="btn btn-outline-danger"   onclick="disableuser()">Disable</button>
+        <button type="button" class="btn btn-outline-danger" onclick="commitRemove()">Remove</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="commitEnable()">Enable</button>
+        <button type="button" class="btn btn-outline-danger" onclick="disableuser()">Disable</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-target="#mdl-edit-contact" data-bs-toggle="modal" onclick="loaduserContact()">Edit Contacts</button>
       </div>
     </div>
   </div>
@@ -169,6 +170,7 @@
 
   });
 
+
 </script>
 
 <!-- Modal remove Propmpt -->
@@ -189,3 +191,64 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal Update Contact and email -->
+<form id="frm-update-contacts">
+  <div class="modal fade" id="mdl-edit-contact" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-secondary-subtle">
+          <h1 class="modal-title fs-5">Edit Staff Contact</h1>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" id="account-mobile" name="account-mobile" class="form-control" placeholder="Mobile number" required>
+            <label for="account-mobile">Mobile Number</label>
+          </div>
+          <div class="form-floating mb-2">
+            <input type="email" id="account-email" name="account-email" class="form-control" placeholder="Email" required>
+            <label for="account-email">Email</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-success" type="submit">Save</button>
+          <button class="btn btn-outline-danger" type="button" data-bs-target="#mdl-update-account" data-bs-toggle="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+     $("#frm-update-contacts").submit(function(event){
+        event.preventDefault();
+      var Username    = $("#user-username").val();
+      var Contact     = $("#account-mobile").val();
+      var Email       = $("#account-email").val();
+    $.post("dirs/accounts/actions/update_contacts.php", {
+        Username  : Username,
+        Contact   : Contact,
+        Email     : Email,
+    }, function(data){
+        if($.trim(data) == "success"){
+            $("#mdl-edit-contact").modal('hide');
+            $("#mdl-update-account").modal('hide');
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "Update success.",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+            loadAccounts();
+        }else{
+            alert("Error: " + data);
+        }
+    });
+});
+
+
+</script>
