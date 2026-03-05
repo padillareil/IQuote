@@ -19,13 +19,14 @@ function reil_encrypt(string $data): string {
 $Admin = $_SESSION['UserName'];
 
 // Fetch user info
-$Admindtls = $conn->prepare("SELECT Signature, Name, Bcode, Branch, Corporation, UPosition, UserName, Region, Mobile, Landline FROM USR WHERE UserName = ?");
+$Admindtls = $conn->prepare("SELECT Signature, Name, Bcode, Branch, Corporation, UPosition, UserName, Region, Mobile, Landline, Email FROM USR WHERE UserName = ?");
 $Admindtls->execute([$Admin]);
 $row = $Admindtls->fetch(PDO::FETCH_ASSOC);
 
 $Signature     = $row['Signature'];
 $Name          = $row['Name'];
 $Bcode         = $row['Bcode'];
+$Email         = $row['Email'];
 $UserBranch    = $row['Branch'];
 $Position      = $row['UPosition'];
 $Region        = $row['Region'];
@@ -228,7 +229,8 @@ try {
         @mPrintStatus = ?,
         @mQSTATUS = ?, 
         @mExpiration = ?,
-        @mUsername = ?
+        @mUsername = ?,
+        @mEmail = ?
 
 
         ");
@@ -272,7 +274,8 @@ try {
         $PrintStatus,
         $QSTATUS, 
         $Expiration,
-        $Admin
+        $Admin,
+        $Email
     ]);
 
     // Generate QNumber: Bcode + YYYYMMDD + sequential ID
