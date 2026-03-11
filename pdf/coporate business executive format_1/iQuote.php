@@ -549,9 +549,9 @@ class PDF extends FPDF {
         if (!empty($landline) && !empty($mobile)) {
             $contactText = "For further information, please feel free to call us:  $landline | $mobile.";
         } elseif (!empty($landline)) {
-            $contactText = "For further information, please feel free to call us: Landline: $landline.";
+            $contactText = "For further information, please feel free to call us: $landline.";
         } elseif (!empty($mobile)) {
-            $contactText = "For further information, please feel free to call us: Mobile: $mobile.";
+            $contactText = "For further information, please feel free to call us: $mobile.";
         }
 
         // Print contact info if available
