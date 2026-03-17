@@ -235,6 +235,10 @@
   /*Function Approved Quotation*/
   function commitApproved() {
     setSubmitApproved(true);
+      var CustomerName = $("#edit-customer").val();
+      var ContactNumber = $("#edit-contactnumber").val();
+      var TinNumber = $("#edit-tinnumber").val();
+
       var DeliveryCharge = $("#edit-deliverycharge").val();
       var GrandTotal     = $("#edit-grandtotal").val();
       var QNumber        = $("#edit-qnumber").val();
@@ -292,6 +296,11 @@
      $.post(
           "dirs/quotations/actions/update_quotapproved.php",
           {
+
+              CustomerName :CustomerName,
+              ContactNumber : ContactNumber,
+              TinNumber : TinNumber,
+              
               DeliveryCharge: DeliveryCharge,
               GrandTotal: GrandTotal,
               QNumber: QNumber,

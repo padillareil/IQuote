@@ -322,6 +322,17 @@ function convertDate(dateStr) {
                   }
 
 
+                  if (['PENDING', 'ON HOLD'].includes(response.Data.QSTATUS)) {
+                      $("#edit-customer").addClass('border-warning-subtle').prop('readonly', false);
+                      $("#edit-contactnumber").addClass('border-warning-subtle').prop('readonly', false);
+                      $("#edit-tinumber").addClass('border-warning-subtle').prop('readonly', false);
+
+                  } else {
+                      $("#edit-customer").removeClass('border-warning-subtle').prop('readonly', true);
+                      $("#edit-contactnumber").removeClass('border-warning-subtle').prop('readonly', true);
+                      $("#edit-tinumber").removeClass('border-warning-subtle').prop('readonly', true);
+                  }
+
                   // Payment Method Condition
                   var paymentTerm = response.Data.PaymentTerm;
                   $("#installment-field").addClass('d-none');

@@ -4,7 +4,7 @@ require_once '../../../config/local_db.php';
 $User = $conn->prepare("
     SELECT UserName, Name, UPosition, Branch, AccountStatus
     FROM USR
-    WHERE Position IN ('Promoter', 'BA', 'CNCMANAGER')
+    WHERE Position IN ('Promoter', 'BA')
     ORDER BY Name ASC
 ");
 $User->execute();

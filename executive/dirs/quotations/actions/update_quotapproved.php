@@ -16,7 +16,9 @@ function cleanNumeric($val) {
     $val = preg_replace("/[^0-9.]/", "", $val);
     return $val === "" ? null : $val; // use 0 if you want instead of null
 }
-
+$CustomerName   = $_POST['CustomerName'] ?? '';
+$ContactNumber  = $_POST['ContactNumber'] ?? '';
+$TinNumber      = $_POST['TinNumber'] ?? '';
 $GrandTotal     = cleanNumeric($_POST['GrandTotal']);
 $DeliveryCharge = cleanNumeric($_POST['DeliveryCharge']);
 $Orders         = json_decode($_POST['Orders'], true);
@@ -51,9 +53,12 @@ try {
 
     /* Quotation Update */
     $upd_quotation = $conn->prepare("
-        EXEC dbo.UPDATE_QUOTATION ?, ?, ?, ?, ?
+        EXEC dbo.UPDATE_QUOTATION ?, ?, ?, ?, ?,?,?,?
     ");
     $upd_quotation->execute([
+        $CustomerName,
+        $ContactNumber,
+        $TinNumber,
         $DeliveryCharge,
         $GrandTotal,
         $Status,

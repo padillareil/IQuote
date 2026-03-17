@@ -4,7 +4,7 @@ require_once '../../../config/local_db.php';
 $User = $conn->prepare("
     SELECT UserName, Name, UPosition, Branch, AccountStatus
     FROM USR
-    WHERE Role = 'HBU' AND Bcode = 'ICBU'
+    WHERE Role = 'HBU'
     ORDER BY Name ASC
 ");
 $User->execute();
