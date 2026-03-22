@@ -56,7 +56,7 @@
 	<div class="col-md-6">
 		<div class="card shadow-sm">
 			<div class="card-body d-flex justify-content-center align-items-center">
-			    <img src="#" alt="PDF Header" class="img-fluid h-100 w-auto" id="preview-image">
+			    <img src="assets/image/icon/logo.png" alt="PDF Header" class="img-fluid h-100 w-auto" id="preview-image">
 			    <input type="hidden" id="image-id">
 			</div>
 		</div>

@@ -101,12 +101,12 @@
 
 <script>
     function logout() {
-    $.post("actions/logoutinventory.php", {}, function(data) {
-        if ($.trim(data) == "OK") {
-            window.location.assign("index.php");
-        }
-    });
-}
+      $.post("actions/logoutinventory.php", {}, function(data) {
+          if ($.trim(data) == "OK") {
+              window.location.assign("index.php");
+          }
+      });
+  }
 </script>
 
 

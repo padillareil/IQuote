@@ -16,6 +16,14 @@
   })
 })*/
 
+/*Function logout admin*/
+function logoutAdmin() {
+    $.post("actions/logout.php", {}, function(data) {
+        if ($.trim(data) == "OK") {
+            window.location.assign("index.php");
+        }
+    });
+}
 
 
 /*Function toggle show password*/
