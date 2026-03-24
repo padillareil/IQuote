@@ -237,7 +237,7 @@
     setSubmitApproved(true);
       var CustomerName = $("#edit-customer").val();
       var ContactNumber = $("#edit-contactnumber").val();
-      var TinNumber = $("#edit-tinnumber").val();
+      var TinNumber = $("#edit-tinumber").val();
 
       var DeliveryCharge = $("#edit-deliverycharge").val();
       var GrandTotal     = $("#edit-grandtotal").val();

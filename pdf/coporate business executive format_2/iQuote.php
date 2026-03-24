@@ -389,7 +389,7 @@ class PDF extends FPDF {
                         // Terms for Personal customers
                         $texts = [
                             "For installment payments, the payment term is {$Installment}, and a {$Downpayment} down payment is required before processing the order.",
-                            "The payment may be made in cash, or alternativey, via bank transfer to the following details:\n         Bank: BDO\n         Account Name: IMPERIAL APPLIANCE PLAZA\n         Account Number: 0031-004-313-10",
+                            "The payment may be made in cash, or alternatively, via bank transfer to the following details:\n         Bank: BDO\n         Account Name: IMPERIAL APPLIANCE PLAZA\n         Account Number: 0031-004-313-10",
                             "The payment can be made via check with the following details:\n         Bank: {$CashBank}\n         Account Name: {$CashAccountName}\n         Account Number: {$CashAccountNumber}",
                             "Delivery lead time:\n        a. On-hand Stock: 1 to 2 days after payment confirmation, depending on availability and branch delivery schedule."
                         ];
@@ -417,7 +417,7 @@ class PDF extends FPDF {
                    if (trim($Company) === 'PERSONAL') {
                         // Terms for Personal customers
                         $texts = [
-                            "The payment may be made in cash, or alternativey, via bank transfer to the following details:\n         Bank: BDO\n         Account Name: IMPERIAL APPLIANCE PLAZA\n         Account Number: 0031-004-313-10",
+                            "The payment may be made in cash, or alternatively, via bank transfer to the following details:\n         Bank: BDO\n         Account Name: IMPERIAL APPLIANCE PLAZA\n         Account Number: 0031-004-313-10",
                             "The payment can be made via check with the following details:\n         Bank: {$CashBank}\n         Account Name: {$CashAccountName}\n         Account Number: {$CashAccountNumber}\n         a. On-Us Check (from the same bank) will require a 3-banking day clearing period.\n         b. An Interbank (from a different bank) will also require a 3-banking day clearing period.",
                             "Delivery lead time:\n        a. On-hand Stock: 1 to 2 days after payment confirmation, depending on availability and the branch delivery schedule."
                         ];
@@ -502,7 +502,7 @@ class PDF extends FPDF {
                     if (trim(strtolower($Company)) === 'PERSONAL') {
                          // Terms for Personal customers
                          $texts = [
-                             "The payment may be made in cash, or alternativey, via bank transfer to the following details:\n         Bank: BDO\n         Account Name: IMPERIAL APPLIANCE PLAZA\n         Account Number: 0031-004-313-10",
+                             "The payment may be made in cash, or alternatively, via bank transfer to the following details:\n         Bank: BDO\n         Account Name: IMPERIAL APPLIANCE PLAZA\n         Account Number: 0031-004-313-10",
                              "The payment can be made via check with the following details:\n         Bank: {$CashBank}\n         Account Name: {$CashAccountName}\n         Account Number: {$CashAccountNumber}\n         a. On-Us Check (from the same bank) will require a 3-banking day clearing period.\n         b. An Interbank (from a different bank) will also require a 3-banking day clearing period.",
                              "Delivery lead time:\n        a. On-hand Stock: 1 to 2 days after payment confirmation, depending on availability and the branch delivery schedule."
                          ];
