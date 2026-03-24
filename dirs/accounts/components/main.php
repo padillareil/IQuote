@@ -7,7 +7,7 @@
     <a class="nav-link" data-bs-toggle="tab" href="#online">Online</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#icbu">ICBU</a>
+    <a class="nav-link" data-bs-toggle="tab" href="#icbu">B2B Executives</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" data-bs-toggle="tab" href="#branch">Branch</a>
