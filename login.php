@@ -106,7 +106,7 @@
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body p-4 text-center">
-        <p class="mb-0">Please contact Software Development Department for account recovery assistance, or call <br> <a href="#">0967-302-5163.</a></p>
+        <p class="mb-0">Please contact Software Development Department for account recovery assistance, or call <br> <a href="#">0945-106-7700.</a></p>
       </div>
     </div>
   </div>
