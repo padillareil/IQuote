@@ -99,7 +99,8 @@ function mdlUpdate(UserName) {
             $("#ua-fullname").val(response.Data.Name);
             $("#ua-position").val(response.Data.UPosition);
             $("#ua-landline").val(response.Data.Landline);
-             $("#ua-mobile").val(response.Data.Mobile);
+            $("#ua-mobile").val(response.Data.Mobile);
+            $("#ua-email").val(response.Data.Email);
         }else{
             alert(jQuery.trim(response.Data));
         }
@@ -214,6 +215,7 @@ function updateAccount() {
     var Position        = $("#ua-position").val();
     var Landline        = $("#ua-landline").val();
     var Mobile          = $("#ua-mobile").val();
+    var Email           = $("#ua-email").val();
 
     $.post("dirs/accounts/actions/update_userdetails.php", {
         Username        : Username,
@@ -221,6 +223,7 @@ function updateAccount() {
         Position     : Position,
         Landline        : Landline,
         Mobile     : Mobile,
+        Email     : Email,
     }, function(data){
         if($.trim(data) == "success"){
             console.log("User details changes.");

@@ -547,11 +547,11 @@ class PDF extends FPDF {
         // Build contact number text
         $contactText = '';
         if (!empty($landline) && !empty($mobile)) {
-            $contactText = "For further information, please feel free to call us:  $landline | $mobile.";
+            $contactText = "For further information, please feel free to contact us:  $landline | $mobile.";
         } elseif (!empty($landline)) {
-            $contactText = "For further information, please feel free to call us: $landline.";
+            $contactText = "For further information, please feel free to contact us: $landline.";
         } elseif (!empty($mobile)) {
-            $contactText = "For further information, please feel free to call us: $mobile.";
+            $contactText = "For further information, please feel free to contact us: $mobile.";
         }
 
         // Print contact info if available

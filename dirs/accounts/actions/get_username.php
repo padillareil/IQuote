@@ -8,7 +8,7 @@ try {
   $conn->beginTransaction();
 
     $fetch_user = $conn->prepare("
-      SELECT UserName, Name, Landline, Mobile, UPosition
+      SELECT UserName, Name, Landline, Mobile, UPosition, Email
       FROM usr 
       WHERE UserName = ?
     ");

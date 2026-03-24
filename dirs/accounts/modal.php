@@ -201,6 +201,10 @@
           <input type="text" id="ua-mobile" name="ua-mobile" class="form-control" placeholder="Mobile">
           <label for="ua-mobile">Mobile</label>
         </div>
+        <div class="form-floating mb-2">
+          <input type="email" id="ua-email" name="ua-email" class="form-control" placeholder="Email">
+          <label for="ua-email">Email</label>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" onclick="updateAccount()">Save</button>
