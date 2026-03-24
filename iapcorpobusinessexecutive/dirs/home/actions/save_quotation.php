@@ -112,16 +112,13 @@ try {
         $CorporateAccNumber     = $row['BankAccountNumber'];
     }
 
-    /*Fetch Branch Bank*/
-    // If user branch is ONLINE, use the selected branch; otherwise use the user's own branch
-    $branchParameter = ($UserBranch === "ONLN" || $UserBranch === "ICBU" || $UserBranch === "HEAD OFFICE") ? $Branch : $UserBranch;
 
     $BranchBankAccount = $conn->prepare("
         SELECT Bank, AccName, AccNumber
         FROM bnk
         WHERE BnkOwnership = 'BRNCH' AND Branch = ?
     ");
-    $BranchBankAccount->execute([$branchParameter]);
+    $BranchBankAccount->execute([$Branch]);
 
     $row = $BranchBankAccount->fetch(PDO::FETCH_ASSOC);
 
