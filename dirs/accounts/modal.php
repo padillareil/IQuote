@@ -103,11 +103,8 @@
             <input type="password" id="upd-newpassword" name="upd-newpassword" class="form-control" placeholder="New Password">
             <label for="upd-newpassword">New Password</label>
           </div>
-          <div class="form-check d-flex justify-content-end mb-3">
-          <input class="form-check-input" type="checkbox" id="new-updpassword" onclick="shewPassword()">
-          <label class="form-check-label text-muted ms-2" for="new-updpassword">
-            Show Password
-          </label>
+          <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="new-updpassword" onclick="shewPassword()">Show Password
         </div>
         </div>
       </div>
