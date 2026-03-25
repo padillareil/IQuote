@@ -51,7 +51,7 @@ try {
 
     /* Quotation Update */
     $upd_quotation = $conn->prepare("
-        EXEC dbo.UPDATE_QUOTATION ?, ?, ?, ?, ?
+        EXEC dbo.UPDATE_QUOTATION_MANAGER ?, ?, ?, ?, ?
     ");
     $upd_quotation->execute([
         $DeliveryCharge,
