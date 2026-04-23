@@ -66,7 +66,7 @@ try {
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="#">
         <!-- <span class="ms-2 fw-semibold">i<span class="text-danger fs-4">Q</span>uote</span> -->
-        <img src="../assets/image/icon/logo.png" style="height: 8vh; width: 8vh;">
+        <img src="../assets/image/icon/iapwhite.png" style="height: 8vh; width: 8vh;">
         </a>
         <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#main-menu" aria-controls="main-menu" 

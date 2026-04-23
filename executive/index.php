@@ -127,6 +127,12 @@ try {
                       </li>
                   </ul>
               </li>
+              <li class="nav-item" id="quotes">
+                  <a class="nav-link text-white <?php echo $inboxActive; ?>"
+                     href="#" name="menu" menucode="quotation_list">
+                      Monitor Quotation
+                  </a>
+              </li>
           <?php endif; ?>
 
           <!-- Settings (Always visible) -->

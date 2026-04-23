@@ -82,6 +82,13 @@ $("#main-menu")
       `;
       $file = "dirs/ho-encoder/ho-encoder.php";
     break;
+    case "quotation_list":
+      $maintitle = "";
+      $mainbreadcrumb = `
+        <li class="breadcrumb-item active"></li>
+      `;
+      $file = "dirs/quotation_list/quotation_list.php";
+    break;
     case "settings":
       $maintitle = "";
       $mainbreadcrumb = `

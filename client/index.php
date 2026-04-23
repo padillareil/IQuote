@@ -61,7 +61,7 @@ try {
     <nav class="navbar navbar-expand-lg py-2 navbar-dark" style="background-color: #00008B;">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="../assets/image/icon/logo.png" alt="iQuote Logo" style="width: 8vh; height: 8vh; border-radius: 8px;">
+          <img src="../assets/image/icon/iapwhite.png" alt="iQuote Logo" style="width: 8vh; height: 8vh; border-radius: 8px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#main-menu" aria-controls="main-menu" 
