@@ -83,7 +83,10 @@ try {
 
              <!-- For Creating Account for branches asignment base on the seletected details -->
               <li id="nav-allocate" class="nav-item d-none" ><a class="nav-link text-white" href="#" name="menu" menucode="accounts">Accounts</a></li>
-
+              <li class="nav-item" id="quotes">
+                  <a class="nav-link text-white" href="#" name="menu" menucode="quotation_list">  Monitor Quotation
+                  </a>
+              </li>
             <li class="nav-item"><a class="nav-link text-white" href="#" name="menu" menucode="settings">Settings</a></li>
           </ul>
           <div class="d-flex align-items-center">

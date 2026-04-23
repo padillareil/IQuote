@@ -179,3 +179,88 @@
 
 
 
+<!-- Bank Transfer, Check Design  -->
+<!-- <div class="mb-5">
+    <h6 class="text-danger  text-uppercase small mb-3">II. Mode of Payment</h6>
+    <div class="p-3 border rounded-3 bg-white d-flex align-items-center gap-4">
+        <div class="display-6 text-muted"><i class="bi bi-bank"></i></div>
+        <div>
+            <span class="badge bg-danger mb-2">BANK TRANSFER</span>
+            <p class="mb-0 text-dark ">BDO Unibank</p>
+            <p class="mb-0 small text-muted">Acc Name: Retail Corp Sales | Acc No: 1234-5678-90</p>
+        </div>
+    </div>
+</div>
+ -->
+
+ <!-- Cash  of Mode of Payment -->
+<!--   <div class="mb-5">
+                       <h6 class="text-danger text-uppercase small mb-3 fw-bold">II. Mode of Payment</h6>
+                       <div class="p-3 border rounded-3 bg-white shadow-sm">
+                           <div class="d-flex align-items-center gap-4">
+                               <div class="display-6 text-primary">
+                                   <i class="bi bi-cash-stack"></i>
+                               </div>
+                               
+                               <div class="flex-grow-1">
+                                   <div class="row">
+                                       <div class="col-md-5 border-end">
+                                           <p class="mb-0 text-muted small text-uppercase fw-bold" style="font-size: 0.7rem;">Payment Method</p>
+                                       </div>
+                                   </div>
+                                   <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3 text-uppercase">Cash</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div> -->
+
+<!-- Debit deigndd -->
+<!--  <div class="mb-5">
+     <h6 class="text-danger text-uppercase small mb-3 fw-bold">II. Mode of Payment</h6>
+     <div class="p-3 border rounded-3 bg-white shadow-sm">
+         <div class="d-flex align-items-center gap-4">
+             <div class="display-6 text-primary">
+                 <i class="bi bi-credit-card"></i>
+             </div>
+             
+             <div class="flex-grow-1">
+                 <div class="row">
+                     <div class="col-md-5 border-end">
+                         <p class="mb-0 text-muted small text-uppercase fw-bold" style="font-size: 0.7rem;">Payment Method</p>
+                     </div>
+                 </div>
+                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3 text-uppercase">Debit / Credit Card</span>
+             </div>
+         </div>
+     </div>
+ </div>
+ -->
+ <!-- Installment desing -->
+<!--  <div class="mb-5">
+     <h6 class="text-danger text-uppercase small mb-3 fw-bold">II. Mode of Payment</h6>
+     <div class="p-3 border rounded-3 bg-white shadow-sm">
+         <div class="d-flex align-items-center gap-4">
+             <div class="display-6 text-primary">
+                 <i class="bi bi-calendar-check"></i>
+             </div>
+             
+             <div class="flex-grow-1">
+                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3">INSTALLMENT</span>
+                 
+                 <div class="row">
+                     <div class="col-md-6 border-end">
+                         <p class="mb-0 text-muted small text-uppercase fw-bold" style="font-size: 0.7rem;">Downpayment</p>
+                         <p class="mb-0 text-dark fw-bold fs-4">₱25,000.00</p>
+                         <span class="text-secondary small italic">Payable upon approval</span>
+                     </div>
+                     
+                     <div class="col-md-6 ps-md-4">
+                         <p class="mb-0 text-muted small text-uppercase fw-bold" style="font-size: 0.7rem;">Payment Period</p>
+                         <p class="mb-0 text-dark fw-bold fs-4">2 - Months</p>
+                         <span class="text-secondary small italic">Total installment period</span>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div> -->

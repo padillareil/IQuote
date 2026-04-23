@@ -53,12 +53,19 @@ $("#main-menu")
       `;
       $file = "dirs/accounts/accounts.php";
     break;
-  case "allocate":
+    case "allocate":
       $maintitle = "";
       $mainbreadcrumb = `
         <li class="breadcrumb-item active"></li>
       `;
       $file = "dirs/allocate/allocate.php";
+    break;
+    case "quotation_list":
+      $maintitle = "";
+      $mainbreadcrumb = `
+        <li class="breadcrumb-item active"></li>
+      `;
+      $file = "dirs/quotation_list/quotation_list.php";
     break;
     case "settings":
       $maintitle = "";
