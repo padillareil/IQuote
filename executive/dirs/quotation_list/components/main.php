@@ -1,24 +1,40 @@
+<!-- Nav Pills -->
+<ul class="nav nav-pills nav-fill justify-content-center d-none">
+  <li class="nav-item">
+    <a class="nav-link active" data-bs-toggle="tab" href="#inbox">Customer</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#edit">Edit</a>
+  </li>
+</ul>
+<div class="mb-2 mt-2">
+  <div class="card shadow-sm border-0 bg-light">
+    <div class="card-body d-flex align-items-center">
+      <div class="me-3">
+        <img src="../assets/image/icon/logo.png" alt="iQuote Logo" style="width: 8vh; height: 8vh; border-radius: 8px;">
+      </div>
+      <div>
+        <h4 class="mb-1 fw-bold text-danger">Verified Quotation</h4>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="card shadow-lg">
 	<div class="card-header border-0 bg-white py-3 px-4">
-	    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-	        <div class="me-auto">
-	            <h4 class="mb-0 text-danger">Verified Quotation</h4>
-	        </div>
-
-	        <div class="d-flex align-items-center gap-2 flex-grow-1 flex-md-grow-0">
-	            <div style="max-width: 500px;">
-	                <input type="search" name="search-quotation" id="search-quotation" class="form-control py-2 shadow-none" placeholder="Search...">
-	            </div>
-
-	            <div class="input-group input-group-sm" style="width: 180px;">
-	                <select class="form-select py-2 shadow-none fw-semibold" id="select-branch">
-	                </select>
-	            </div>
-	        </div>
+	    <div class="row">
+	    	<div class="col-md-10">
+	          <input type="search" name="search-quotation" id="search-quotation" class="form-control py-2 col-md-12 shadow-none" placeholder="Search...">
+	    	</div>
+	    	<div class="col-md-2">
+	    		<div class="input-group input-group-sm">
+	    		    <select class="form-select py-2 shadow-none fw-semibold" id="select-branch">
+	    		    </select>
+	    		</div>
+	    	</div>
 	    </div>
 	</div>
 	
-	<div class="card-body overflow-auto" style="height: 70vh;">
+	<div class="card-body overflow-auto" style="height: 65vh;">
 	    <ul class="list-unstyled p-3 m-0" id="display_approved_quotations">
 	        <li class="d-flex justify-content-between align-items-center bg-white border rounded-3 p-4 mb-3 shadow-sm" onclick="viewQuotation()">
 	            
@@ -116,10 +132,12 @@
 	            </tr>
 	    `);
 	    var Search = $("#search-quotation").val();
+	    var Branch = $("#select-branch").val();
 	    $.post("dirs/quotation_list/actions/get_quotelist_pagination.php", {
 	        CurrentPage,
 	        PageSize,
-	        Search
+	        Search,
+	        Branch
 	    }, function (data) {
 	        let response;
 
@@ -155,7 +173,7 @@
 	    data.forEach(bev => {
 	        display.append(`
 	           <li class="quotation-item d-flex justify-content-between align-items-center bg-white border rounded-3 p-4 mb-2 shadow-sm"
-	               onclick="viewQuotation(${bev.QID})">
+	               onclick="viewQuotation('${bev.QNumber}')">
 	               <div class="d-flex align-items-start gap-3">
 	                   <div class="text-muted font-monospace pt-1" style="min-width: 30px;">
 	                       ${bev.OrderNumber}
@@ -301,6 +319,13 @@
 	          loadApprovedQuotation(CurrentPage + 1);
 	      }
 	  });
+
+	  $("#select-branch").on("change", function() {
+	      CurrentPage = 1;
+	      const branch = $(this).val();
+	      loadApprovedQuotation(CurrentPage, branch);
+	  });
+
 
 	  $(document).on("click", "#pagination-in_activeuser .page-link", function(e) {
 	      e.preventDefault();

@@ -15,48 +15,31 @@
                         <div class="col-md-4 border-end ps-md-4">
                             <h6 class="text-muted small d-block fw-bold">Releasing Branch</h6>
                             <div class="d-flex align-items-center gap-2 mt-1">
-                                <h6 class="text-dark fw-bold mb-0">AGDAO</h6>
+                                <h6 class="text-dark fw-bold mb-0" id="releasing-branch"></h6>
                             </div>
                         </div>
 
                         <div class="col-md-4 border-end ps-md-4">
                             <span class="text-muted small d-block text-uppercase fw-bold" style="font-size: 0.65rem; letter-spacing: 0.5px;">Quoted By</span>
                             <div class="mt-1">
-                                <p class="mb-0 text-dark"><strong>VINCE GETUTUA</strong></p>
-                                
-                                <p class="mb-1 text-secondary small fw-medium">Coporate Business Executive</p>
-                                
+                                <p class="mb-0 text-dark"><strong id="quoted-by"></strong></p>
+                                <p class="mb-1 text-secondary small fw-medium" id="quoted-by-position"></p>
                                 <div class="d-flex align-items-center gap-3">
-                                    <small class="text-muted">
-                                        <i class="bi bi-calendar3 text-primary me-1"></i> April 21, 2026
-                                    </small>
-                                    <small class="text-muted">
-                                        <i class="bi bi-clock text-primary me-1"></i> 09:45 AM
-                                    </small>
+                                    <i class="bi bi-calendar3 text-primary me-1"></i> <div id="date-created"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4 border-end ps-md-4">
+                        <div class="col-md-4 ps-md-4">
                             <span class="text-muted small d-block text-uppercase fw-bold" style="font-size: 0.65rem; letter-spacing: 0.5px;">Approved By</span>
                             <div class="mt-1">
-                                <p class="mb-0 text-dark"><strong>GRIFFIN MERCEDEZ</strong></p>
-                                
-                                <p class="mb-1 text-secondary small fw-medium">Branch Manager</p>
-                                
+                                <p class="mb-0 text-dark"><strong id="approver-name"></strong></p>
+                                <p class="mb-1 text-secondary small fw-medium" id="approver-position"></p>
                                 <div class="d-flex align-items-center gap-3">
-                                    <small class="text-muted">
-                                        <i class="bi bi-calendar3 text-primary me-1"></i> April 28, 2026
-                                    </small>
-                                    <small class="text-muted">
-                                        <i class="bi bi-clock text-primary me-1"></i> 10:45 AM
-                                    </small>
+                                    <i class="bi bi-calendar3 text-primary me-1"></i> <div id="date-approved"></div>
                                 </div>
                             </div>
                         </div>
-
-                        
-
                     </div>
                 </div>
 
@@ -67,9 +50,8 @@
                        <div class="row g-3">
                            <div class="col-md-6 border-end">
                                <p class="mb-1 text-muted small">Representative / Company</p>
-                               <p class="fs-5 fw-bold mb-0 text-dark">Juan Dela Cruz</p>
-                               <p class="text-secondary mb-0">
-                                   Tech Solutions Inc. 
+                               <p class="fs-5 fw-bold mb-0 text-dark" id="customer-name"></p>
+                               <p class="text-secondary mb-0" id="customer-company">
                                </p>
                            </div>
 
@@ -77,15 +59,15 @@
                                <div class="row">
                                    <div class="col-6 mb-2">
                                        <p class="mb-0 text-muted small">TIN Number</p>
-                                       <p class="fw-bold text-dark mb-0">0220-345-0000</p>
+                                       <p class="fw-bold text-dark mb-0" id="tin-number"></p>
                                    </div>
                                    <div class="col-6 mb-2">
                                        <p class="mb-0 text-muted small">Contact Number</p>
-                                       <p class="fw-bold text-dark mb-0">0912-345-6789</p>
+                                       <p class="fw-bold text-dark mb-0" id="customer-contactnumber"></p>
                                    </div>
                                    <div class="col-12">
                                        <p class="mb-0 text-muted small">Customer Type</p>
-                                       <p class="text-dark mb-0">Corporate Private</p>
+                                       <p class="text-dark mb-0" id="customer-type"></p>
                                    </div>
                                </div>
                            </div>
@@ -96,12 +78,12 @@
                                        <i class="bi bi-geo-alt text-danger mt-1"></i>
                                        <div>
                                            <p class="mb-1 text-muted small text-uppercase fw-bold">Customer Address</p>
-                                           <p class="mb-0 text-dark">
+                                           <p class="mb-0 text-dark" id="customer-complete-address">
                                                123 Street Name, Brgy. Central, Municipality, Province, 8000
                                            </p>
                                            <p class="mb-0 small">
                                                <span class="text-primary fw-medium">Landmark:</span> 
-                                               <span class="text-secondary">Beside the Blue Building</span>
+                                               <span class="text-secondary" id="customer-landmark"></span>
                                            </p>
                                        </div>
                                    </div>
@@ -111,23 +93,7 @@
                    </div>
 
                    <div class="mb-5">
-                       <h6 class="text-danger text-uppercase small mb-3 fw-bold">II. Mode of Payment</h6>
-                       <div class="p-3 border rounded-3 bg-white shadow-sm">
-                           <div class="d-flex align-items-center gap-4">
-                               <div class="display-6 text-primary">
-                                   <i class="bi bi-cash-stack"></i>
-                               </div>
-                               
-                               <div class="flex-grow-1">
-                                   <div class="row">
-                                       <div class="col-md-5 border-end">
-                                           <p class="mb-0 text-muted small text-uppercase fw-bold" style="font-size: 0.7rem;">Payment Method</p>
-                                       </div>
-                                   </div>
-                                   <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3 text-uppercase">Cash</span>
-                               </div>
-                           </div>
-                       </div>
+                            <div id="display-payment-method"></div>
                    </div>
 
                    <div class="mb-5">
@@ -178,17 +144,25 @@
                                    </tbody>
                            </table>
 
-                           <div class="bg-dark text-white p-2 d-flex justify-content-between align-items-center">
+                           <div class="border-dark p-2 d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <div class="pe-3 border-end border-secondary">
-                                        <h6 class="text-secondary d-block text-uppercase fw-bold" style="font-size: 0.65rem;">Delivery Charge</h6>
-                                        <span class="fw-bold">₱500.00</span>
+                                       <h6 class="text-secondary d-block text-uppercase fw-bold" style="font-size: 0.65rem;">
+                                            Delivery Charge
+                                        </h6>
+                                        <span class="fw-bold">
+                                            ₱ <span id="delivery-charge"></span>
+                                        </span>
                                     </div>
                                 </div>
                                        
                                 <div class="text-end">
-                                    <h6 class="text-secondary d-block text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">Grand Total</h6>
-                                    <span class="fs-3 fw-bold text-white">₱125,500.00</span>     
+                                    <h6 class="text-secondary d-block text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">
+                                        Grand Total
+                                    </h6>
+                                     <span class="fs-4 fw-bold">
+                                        ₱ <span id="grand-total"></span>
+                                    </span>
                                 </div>
                             </div>
                        </div>

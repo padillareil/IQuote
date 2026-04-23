@@ -6,12 +6,13 @@
   $CurrentPage  = $_POST['CurrentPage'] ?? 1;
   $PageSize     = $_POST['PageSize'] ?? 20;
   $Search       = $_POST['Search'];
+  $Branch       = $_POST['Branch'];
 
 try {
   $conn->beginTransaction();
 
-    $fetch_quotations = $conn->prepare("EXEC dbo.[QuotationList_Pagination] ?,?,?,?");
-    $fetch_quotations->execute([$User, $CurrentPage,$PageSize,$Search]);
+    $fetch_quotations = $conn->prepare("EXEC dbo.[QuotationList_Pagination] ?,?,?,?, ?");
+    $fetch_quotations->execute([$User, $CurrentPage,$PageSize,$Search,$Branch]);
     $get_quotations = $fetch_quotations->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();
@@ -30,4 +31,4 @@ try {
   );
   echo json_encode($response);
 }
-?>
+?>  
