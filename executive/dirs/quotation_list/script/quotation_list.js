@@ -242,7 +242,7 @@ function viewQuotation(QNumber){
                         </td>
                         <td class="ps-3 py-3">${itm.Category}</td>
                         <td class="text-end">₱${formatComma(itm.UnitPrice)}</td>
-                        <td class="text-end text-danger">-₱${formatComma(itm.DiscountedAmountPerUnit)}</td>
+                        <td class="text-end">₱${formatComma(itm.DiscountedAmountPerUnit)}</td>
                         <td class="text-end pe-3">₱${formatComma(itm.TotalAmount)}</td>
                     </tr>
                 `;

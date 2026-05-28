@@ -42,14 +42,25 @@ $("#frm-login").on("submit", function (event) {
   event.preventDefault();
 
   var $frm = $(this);
+  var $btn = $("#btn-login");
   var Username = $frm.find("input[name='user-username']").val().trim();
   var Password = $frm.find("input[name='user-password']").val().trim();
+
+  $btn.prop("disabled", true);
+  $btn.html(`
+      <span class="spinner-border spinner-border-sm me-2"></span>
+      Logging In...
+  `);
 
   $.post("actions/login.php", { 
     Username: Username, 
     Password: Password 
   }, function (data) {
     var response = JSON.parse(data);
+
+    /* Restore Button */
+    $btn.prop("disabled", false);
+    $btn.html("Sign In");
 
     if (response.isSuccess === "OK") {
       $frm[0].reset();
@@ -73,7 +84,7 @@ $("#frm-login").on("submit", function (event) {
       } else if (role === "BOSS") {
         window.location.assign("management/index.php");
       } else if (role === "HBU") {
-        window.location.assign("iapcorpobusinessexecutive/index.php");
+        window.location.assign("b2b/index.php");
       } else if (role === "Audit") {
         window.location.assign("audit/index.php");
       } else if (role === "Coordinator") {
@@ -85,12 +96,28 @@ $("#frm-login").on("submit", function (event) {
       }
 
     } else {
-       console.log("Login failed:", response.Message);
+       // console.log("Login failed:", response.Message);
+       Swal.fire({
+          icon: "warning",
+          title: "Login Failed",
+          text: response.Message || "Wrong username or password."
+        });
       $("#user-username").addClass("input-error");
       $("#user-password").addClass("input-error");
       $("#login-error").removeClass("d-none");
     }
-  });
+  }).fail(function () {
+
+    /* Restore Button */
+    $btn.prop("disabled", false);
+    $btn.html("Log In");
+
+    Swal.fire({
+        icon: "error",
+        title: "Connection Error",
+        text: "Unable to connect to the server. Please try again."
+    });
 });
+  });
 
 

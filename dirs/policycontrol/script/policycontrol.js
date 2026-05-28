@@ -31,7 +31,7 @@ function updateTerms(Termdid){
 
 
 /*Function update terms condition policy*/
-function updateTerms(){
+function saveupdateTerms(){
     var Termdid     = $("#terms-id").val();
     var TRMSCON     = $("#upd-policy").val();
 

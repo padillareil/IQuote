@@ -47,7 +47,7 @@
 	        </label>
 	      </div>
 	      <div class="d-grid">
-	        <button class="btn btn-danger btn-lg rounded-0 text-white" type="submit">
+	        <button class="btn btn-danger btn-lg rounded-0 text-white" type="submit" id="btn-login">
 	          Log In
 	        </button>
 	      </div>

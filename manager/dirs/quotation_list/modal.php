@@ -106,7 +106,7 @@
                                        <th class="ps-3">BRAND/MODEL</th>
                                        <th class="ps-3">CATEGORY</th>
                                        <th class="text-end">UNIT PRICE</th>
-                                       <th class="text-end">DISCOUNT</th>
+                                       <th class="text-end">DISCOUNTED PRICE</th>
                                        <th class="text-end pe-3">TOTAL AMOUNT</th>
                                    </tr>
                                </thead>

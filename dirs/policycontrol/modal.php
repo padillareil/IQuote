@@ -38,7 +38,7 @@
           <small>Update General Terms and Condition.</small>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" onclick="updateTerms()">Save</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="saveupdateTerms()">Save</button>
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>

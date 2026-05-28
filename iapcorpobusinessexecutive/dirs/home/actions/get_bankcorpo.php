@@ -24,7 +24,7 @@ try {
   $conn->beginTransaction();
 
     $fetch_corpobank = $conn->prepare("
-      EXEC GET_CORPOBANKACCOUNT @mCorpcode_ = ?
+      EXEC GET_CORPOBANKACCOUNT_B2B @mCorpcode_ = ?
     ");
     $fetch_corpobank->execute([ $Corpcode ]);
     $get_bankcorpo = $fetch_corpobank->fetchAll(PDO::FETCH_ASSOC);

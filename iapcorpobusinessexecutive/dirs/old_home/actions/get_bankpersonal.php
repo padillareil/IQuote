@@ -15,21 +15,22 @@
       return $plain === false ? '' : $plain;
   }
 
-  $Corpcode     = $_POST['Corpcode'];
+
+  $Branch     = $_POST['Branch'];
 
   $response    = array();
 
 try {
   $conn->beginTransaction();
 
-    $fetch_corpobank = $conn->prepare("
-      EXEC GET_CORPOBANKACCOUNT_B2B @mCorpcode_ = ?
+    $fetch_branchbank = $conn->prepare("
+      EXEC GET_PERSONALBANKACCOUNT @mBranch_ = ?
     ");
-    $fetch_corpobank->execute([ $Corpcode ]);
-    $get_bankcorpo = $fetch_corpobank->fetchAll(PDO::FETCH_ASSOC);
+    $fetch_branchbank->execute([ $Branch ]);
+    $get_branchbank = $fetch_branchbank->fetchAll(PDO::FETCH_ASSOC);
 
     // decrypt per row
-    foreach ($get_bankcorpo as &$r) {
+    foreach ($get_branchbank as &$r) {
         if (isset($r['AccountName'])) {
             $r['AccountName'] = reil_decrypt($r['AccountName']);
         }
@@ -38,11 +39,12 @@ try {
         }
     }
 
+
   $conn->commit();
 
   $response = array(
     "isSuccess" => 'success',
-    "Data" => $get_bankcorpo
+    "Data" => $get_branchbank
   );
   echo json_encode($response);
 

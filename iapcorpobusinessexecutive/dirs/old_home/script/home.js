@@ -234,7 +234,6 @@ function loadAllBranch() {
                 $("#bank-accountname").val('');
                 $("#bank-accountnumber").val('');
                 loadCorpCode(selectedBranch);
-                paymentMode();
             });
 
         } else {
@@ -242,35 +241,6 @@ function loadAllBranch() {
         }
     });
 }
-
-
-paymentMode();
-$("#mode-payment").on("change", paymentMode);
-function resetPaymentFields() {
-    $("#installment, #downpayment, #checkterms, #accountnumber-check, #accountname-check, #banktransfer, #accountnumber-form, #accountname-form")
-        .addClass("d-none");
-    $("#installment-period").val("");
-    $("#downpayment-select").val("");
-    $("#bank").val("");
-    $("#bank-accountname").val("");
-    $("#bank-accountnumber").val("");
-    $("#transfer-bank").val("");
-    $("#transfer-bank-accountname").val("");
-    $("#transfer-bank-accountnumber").val("");
-}
-
-function paymentMode() {
-    var paymentMode = $("#mode-payment").val();
-    resetPaymentFields();
-    if (paymentMode === "Installment") {
-        $("#installment, #downpayment").removeClass("d-none");
-    } else if (paymentMode === "Check") {
-        $("#accountnumber-check, #accountname-check, #checkterms").removeClass("d-none");
-    } else if (paymentMode === "Bank Transfer") {
-        $("#accountnumber-form, #accountname-form, #banktransfer").removeClass("d-none");
-    }
-}
-
 
 /*User serrion branch assigned*/
 function loadMyBranch() {
@@ -292,7 +262,6 @@ function loadMyBranch() {
                 $("#bank-accountname").val('');
                 $("#bank-accountnumber").val('');
                 loadCorpCode(selectedBranch);
-                paymentMode();
             });
 
         } else {
