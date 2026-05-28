@@ -58,6 +58,8 @@ try {
 	<link rel="stylesheet" href="../assets/plugins/summernote/summernote-lite.min.css">
 	<link rel="stylesheet" href="../assets/plugins/datepicker/jquery-ui.structure.min.css">
   <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/select2/css/select2.min.css">
+
 	<link rel="icon" href="../assets/image/icon/logo.png">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed bg-primary-subtle">
@@ -140,6 +142,7 @@ try {
 <script src="../assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="../assets/plugins/toastr/toastr.min.js"></script>
 <script src="../assets/plugins/chart.js/Chart.min.js"></script>
+<script src="../assets/plugins/select2/js/select2.min.js"></script>
 <script src="../assets/plugins/moment/moment.min.js"></script>
 <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>

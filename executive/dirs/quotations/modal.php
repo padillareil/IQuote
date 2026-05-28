@@ -190,8 +190,8 @@
           </p>
         </div>
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-outline-primary me-2" title="Quotation PDF with multiple items displayed on a single page" onclick="pdfSinglePage()">PDF 1</button>
-          <button type="button" class="btn btn-outline-primary" title="Quotation PDF with multiple items split across multiple pages" onclick="pdfMultiplePage()">PDF 2</button>
+          <button type="button" class="btn btn-outline-primary me-2" id="btn-print-singlepager" title="Quotation PDF with multiple items displayed on a single page" onclick="pdfSinglePage()">PDF 1</button>
+          <button type="button" class="btn btn-outline-primary"  id="btn-print-2pager" title="Quotation PDF with multiple items split across multiple pages" onclick="pdfMultiplePage()">PDF 2</button>
         </div>
       </div>
     </div>

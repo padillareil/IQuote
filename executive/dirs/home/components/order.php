@@ -350,43 +350,59 @@
 
 	/* Function Fetch Model */
 	function loadModel(Brand, $row) {
-	  let $modelSelect = $row.find(".model");
-	  $modelSelect
-	    .empty()
-	    .append('<option disabled selected>Loading models...</option>')
-	    .prop("disabled", true);
-
-	  $.post("dirs/home/actions/get_model.php", { Brand: Brand }, function (data) {
-	    let response = JSON.parse(data);
-
-	    if ($.trim(response.isSuccess) === "success") {
-	      $modelSelect.empty();
-
-	      if (response.Data.length > 0) {
-	        $modelSelect.append('<option disabled>Choose Model</option>');
-	        $.each(response.Data, function (index, item) {
-	          $modelSelect.append(
-	            $("<option>", {
-	              value: item.Model,
-	              text: item.Model,
-	              "data-category": item.ItemGroup,
-	              "data-itemcode": item.ItemCode
-	            })
-	          );
-	        });
-	      } else {
-	        $modelSelect.append('<option disabled selected>No model available.</option>');
-	      }
-	    } else {
-	      $modelSelect.empty().append('<option disabled selected>Error loading models.</option>');
+	    let $modelSelect = $row.find(".model");
+	    if ($modelSelect.hasClass("select2-hidden-accessible")) {
+	        $modelSelect.select2('destroy');
 	    }
-	  })
-	  .fail(function () {
-	    $modelSelect.empty().append('<option disabled selected>Failed to load models.</option>');
-	  })
-	  .always(function () {
-	    $modelSelect.prop("disabled", false);
-	  });
+	    $modelSelect
+	        .empty()
+	        .append('<option disabled selected>Loading models...</option>')
+	        .prop("disabled", true);
+
+	    $.post("dirs/home/actions/get_model.php", {
+	        Brand: Brand
+	    }, function (data) {
+	        let response = JSON.parse(data);
+	        if ($.trim(response.isSuccess) === "success") {
+	            $modelSelect.empty();
+	            if (response.Data.length > 0) {
+	                $modelSelect.append(
+	                    '<option disabled selected>Choose Model</option>'
+	                );
+	                $.each(response.Data, function (index, item) {
+	                    $modelSelect.append(
+	                        $("<option>", {
+	                            value: item.Model,
+	                            text: item.Model,
+	                            "data-category": item.ItemGroup,
+	                            "data-itemcode": item.ItemCode
+	                        })
+	                    );
+
+	                });
+	            } else {
+	                $modelSelect.append(
+	                    '<option disabled selected>No model available.</option>'
+	                );
+	            }
+	        } else {
+	            $modelSelect
+	                .empty()
+	                .append('<option disabled selected>Error loading models.</option>');
+	        }
+	    }).fail(function () {
+	        $modelSelect
+	            .empty()
+	            .append('<option disabled selected>Failed to load models.</option>');
+	    }).always(function () {
+	        $modelSelect.prop("disabled", false);
+	        $modelSelect.select2({
+	            placeholder: "Search Model",
+	            width: '100%',
+	            dropdownParent: $row
+	        });
+
+	    });
 	}
 
 

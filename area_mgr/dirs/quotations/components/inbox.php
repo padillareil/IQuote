@@ -983,66 +983,174 @@ function convertDate(dateStr) {
   }
 
  /*Function for single pager pdf*/
-  function pdfSinglePage(){
-     var QNumber = $("#qnumber-print").val();
+  function pdfSinglePage() {
+
+      const btn = $("#btn-print-singlepager");
+      const originalHtml = btn.html();
+
+      // disable and show spinner
+      btn.prop("disabled", true)
+         .html(`
+              <span class="spinner-border spinner-border-sm me-2"></span>
+         `);
+
+      var QNumber = $("#qnumber-print").val();
+
       $.post("dirs/quotations/actions/get_refnumber.php", {
+
           QNumber : QNumber
+
       }, function(data){
+
           let response = JSON.parse(data);
-          if($.trim(response.isSuccess) === "success"){
+
+          if($.trim(response.isSuccess) === "success") {
+
               if (response.Data.QStatus === 'APPROVED') {
-                  
-                  // Create hidden form to send QNumber via POST
+
                   let form = document.createElement("form");
+
                   form.method = "POST";
                   form.action = "../pdf/format_1/iQuote.php";
-                  form.target = "_blank"; // open in new tab
+                  form.target = "_blank";
+
                   let input = document.createElement("input");
+
                   input.type = "hidden";
                   input.name = "QNumber";
                   input.value = response.Data.QNumber;
+
                   form.appendChild(input);
-                  
+
                   document.body.appendChild(form);
                   form.submit();
                   document.body.removeChild(form);
-              } 
+
+              } else {
+
+                  Swal.fire({
+                      icon: 'warning',
+                      title: 'Not Approved',
+                      text: 'Quotation is not approved.',
+                      timer: 2000,
+                      showConfirmButton: false
+                  });
+              }
+
           } else {
-              alert($.trim(response.Data));
+
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Invalid Reference',
+                  text: $.trim(response.Data),
+                  timer: 2000,
+                  showConfirmButton: false
+              });
           }
+
+      }).fail(function(){
+
+          Swal.fire({
+              icon: 'error',
+              title: 'Connection Error',
+              text: 'Unable to connect to server.',
+              timer: 2000,
+              showConfirmButton: false
+          });
+
+      }).always(function(){
+
+          // restore button
+          btn.prop("disabled", false)
+             .html(originalHtml);
+
       });
   }
 
-  /*Function for multiple pager pdf*/
-   function pdfMultiplePage(){
+
+  /* Function for multiple pager PDF */
+  function pdfMultiplePage(){
+
+      const btn = $("#btn-print-2pager");
+      const originalHtml = btn.html();
+
+      btn.prop("disabled", true)
+         .html(`
+              <span class="spinner-border spinner-border-sm me-2"></span>
+         `);
+
       var QNumber = $("#qnumber-print").val();
-       $.post("dirs/quotations/actions/get_refnumber.php", {
-           QNumber : QNumber
-       }, function(data){
-           let response = JSON.parse(data);
-           if($.trim(response.isSuccess) === "success"){
-               if (response.Data.QStatus === 'APPROVED') {
-                   
-                   // Create hidden form to send QNumber via POST
-                   let form = document.createElement("form");
-                   form.method = "POST";
-                   form.action = "../pdf/format_2/iQuote.php";
-                   form.target = "_blank"; // open in new tab
-                   let input = document.createElement("input");
-                   input.type = "hidden";
-                   input.name = "QNumber";
-                   input.value = response.Data.QNumber;
-                   form.appendChild(input);
-                   
-                   document.body.appendChild(form);
-                   form.submit();
-                   document.body.removeChild(form);
-               } 
-           } else {
-               alert($.trim(response.Data));
-           }
-       });
-   }
+
+      $.post("dirs/quotations/actions/get_refnumber.php", {
+
+          QNumber : QNumber
+
+      }, function(data){
+
+          let response = JSON.parse(data);
+
+          if($.trim(response.isSuccess) === "success") {
+
+              if (response.Data.QStatus === 'APPROVED') {
+
+                  let form = document.createElement("form");
+
+                  form.method = "POST";
+                  form.action = "../pdf/format_2/iQuote.php";
+                  form.target = "_blank";
+
+                  let input = document.createElement("input");
+
+                  input.type = "hidden";
+                  input.name = "QNumber";
+                  input.value = response.Data.QNumber;
+
+                  form.appendChild(input);
+
+                  document.body.appendChild(form);
+                  form.submit();
+                  document.body.removeChild(form);
+
+              } else {
+
+                  Swal.fire({
+                      icon: 'warning',
+                      title: 'Not Approved',
+                      text: 'Quotation is not approved.',
+                      timer: 2000,
+                      showConfirmButton: false
+                  });
+              }
+
+          } else {
+
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Invalid Reference',
+                  text: $.trim(response.Data),
+                  timer: 2000,
+                  showConfirmButton: false
+              });
+          }
+
+      }).fail(function(){
+
+          Swal.fire({
+              icon: 'error',
+              title: 'Connection Error',
+              text: 'Unable to connect to server.',
+              timer: 2000,
+              showConfirmButton: false
+          });
+
+      }).always(function(){
+
+          btn.prop("disabled", false)
+             .html(originalHtml);
+
+      });
+  }
+
  
 </script>
 

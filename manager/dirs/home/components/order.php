@@ -203,10 +203,13 @@
 	        <!-- Model -->
 	        <div class="col-md-6 mb-2">
 	            <div class="form-floating mb-2">
+
 	                <select class="form-select model border-warning-subtle" name="model[]">
 	                    <option selected disabled></option>
 	                </select>
+
 	                <label>Choose Model</label>
+
 	            </div>
 	        </div>
 	        <!-- Category -->
@@ -349,7 +352,7 @@
 
 
 	/* Function Fetch Model */
-	function loadModel(Brand, $row) {
+	/*function loadModel(Brand, $row) {
 	  let $modelSelect = $row.find(".model");
 	  $modelSelect
 	    .empty()
@@ -387,6 +390,61 @@
 	  .always(function () {
 	    $modelSelect.prop("disabled", false);
 	  });
+	}*/
+	function loadModel(Brand, $row) {
+	    let $modelSelect = $row.find(".model");
+	    if ($modelSelect.hasClass("select2-hidden-accessible")) {
+	        $modelSelect.select2('destroy');
+	    }
+	    $modelSelect
+	        .empty()
+	        .append('<option disabled selected>Loading models...</option>')
+	        .prop("disabled", true);
+
+	    $.post("dirs/home/actions/get_model.php", {
+	        Brand: Brand
+	    }, function (data) {
+	        let response = JSON.parse(data);
+	        if ($.trim(response.isSuccess) === "success") {
+	            $modelSelect.empty();
+	            if (response.Data.length > 0) {
+	                $modelSelect.append(
+	                    '<option disabled selected>Choose Model</option>'
+	                );
+	                $.each(response.Data, function (index, item) {
+	                    $modelSelect.append(
+	                        $("<option>", {
+	                            value: item.Model,
+	                            text: item.Model,
+	                            "data-category": item.ItemGroup,
+	                            "data-itemcode": item.ItemCode
+	                        })
+	                    );
+
+	                });
+	            } else {
+	                $modelSelect.append(
+	                    '<option disabled selected>No model available.</option>'
+	                );
+	            }
+	        } else {
+	            $modelSelect
+	                .empty()
+	                .append('<option disabled selected>Error loading models.</option>');
+	        }
+	    }).fail(function () {
+	        $modelSelect
+	            .empty()
+	            .append('<option disabled selected>Failed to load models.</option>');
+	    }).always(function () {
+	        $modelSelect.prop("disabled", false);
+	        $modelSelect.select2({
+	            placeholder: "Search Model",
+	            width: '100%',
+	            dropdownParent: $row
+	        });
+
+	    });
 	}
 
 
@@ -787,3 +845,42 @@
 </script>
 
 
+
+<style>
+	/* Fix Select2 height inside form-floating */
+	.form-floating .select2-container .select2-selection--single {
+	    height: calc(3.5rem + 2px);
+	    padding-top: 1.625rem;
+	    padding-bottom: .625rem;
+	    border: 1px solid #dee2e6;
+	}
+
+	/* Align selected text */
+	.form-floating .select2-container--default .select2-selection--single .select2-selection__rendered {
+	    line-height: 2.1rem;
+	    padding-left: .75rem;
+	}
+
+	/* Position arrow */
+	.form-floating .select2-container--default .select2-selection--single .select2-selection__arrow {
+	    height: 100%;
+	    top: 0;
+	    right: 10px;
+	}
+
+	/* Floating label behavior */
+	.form-floating > label {
+	    z-index: 5;
+	}
+
+	/* Make Select2 look like Bootstrap input */
+	.select2-container--default .select2-selection--single {
+	    border-radius: .375rem;
+	}
+
+	/* Focus style */
+	.select2-container--default.select2-container--focus .select2-selection--single {
+	    border-color: #86b7fe;
+	    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+	}
+</style>
