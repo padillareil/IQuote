@@ -801,3 +801,42 @@
 </script>
 
 
+
+<style>
+	/* Fix Select2 height inside form-floating */
+	.form-floating .select2-container .select2-selection--single {
+	    height: calc(3.5rem + 2px);
+	    padding-top: 1.625rem;
+	    padding-bottom: .625rem;
+	    border: 1px solid #dee2e6;
+	}
+
+	/* Align selected text */
+	.form-floating .select2-container--default .select2-selection--single .select2-selection__rendered {
+	    line-height: 2.1rem;
+	    padding-left: .75rem;
+	}
+
+	/* Position arrow */
+	.form-floating .select2-container--default .select2-selection--single .select2-selection__arrow {
+	    height: 100%;
+	    top: 0;
+	    right: 10px;
+	}
+
+	/* Floating label behavior */
+	.form-floating > label {
+	    z-index: 5;
+	}
+
+	/* Make Select2 look like Bootstrap input */
+	.select2-container--default .select2-selection--single {
+	    border-radius: .375rem;
+	}
+
+	/* Focus style */
+	.select2-container--default.select2-container--focus .select2-selection--single {
+	    border-color: #86b7fe;
+	    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+	}
+</style>
